@@ -2,20 +2,59 @@
 
 // Suppress Symfony and Termwind E_DEPRECATED warnings on PHP 8.4
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
-ini_set('display_errors', 0); // Disable error output to users in production
+ini_set('display_errors', 0);
+
+// ─── Serve static files directly (bypasses Laravel entirely) ─────────────────
+// On Vercel all repo files live at /var/task/user/
+$requestUri = strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
+
+$staticMimeTypes = [
+    'css'   => 'text/css; charset=utf-8',
+    'js'    => 'application/javascript; charset=utf-8',
+    'png'   => 'image/png',
+    'jpg'   => 'image/jpeg',
+    'jpeg'  => 'image/jpeg',
+    'gif'   => 'image/gif',
+    'svg'   => 'image/svg+xml',
+    'ico'   => 'image/x-icon',
+    'webp'  => 'image/webp',
+    'woff'  => 'font/woff',
+    'woff2' => 'font/woff2',
+    'ttf'   => 'font/ttf',
+    'eot'   => 'application/vnd.ms-fontobject',
+    'pdf'   => 'application/pdf',
+    'json'  => 'application/json',
+    'xml'   => 'application/xml',
+    'map'   => 'application/json',
+];
+
+$ext = strtolower(pathinfo($requestUri, PATHINFO_EXTENSION));
+
+if ($ext && isset($staticMimeTypes[$ext])) {
+    // Try to find the file in public/
+    $publicFile = __DIR__ . '/../public' . $requestUri;
+    if (is_file($publicFile)) {
+        header('Content-Type: ' . $staticMimeTypes[$ext]);
+        header('Cache-Control: public, max-age=31536000, immutable');
+        header('Content-Length: ' . filesize($publicFile));
+        readfile($publicFile);
+        exit;
+    }
+}
+// ─────────────────────────────────────────────────────────────────────────────
 
 // Force log channel to stderr to prevent read-only filesystem errors on Vercel
 $_ENV['LOG_CHANNEL'] = 'stderr';
 putenv('LOG_CHANNEL=stderr');
 
-// Dynamically set APP_URL to match the current Vercel request host for assets to load properly
+// Dynamically set APP_URL to match the current Vercel request host
 if (isset($_SERVER['HTTP_HOST'])) {
     $proto = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
     $_ENV['APP_URL'] = $proto . '://' . $_SERVER['HTTP_HOST'];
     putenv('APP_URL=' . $_ENV['APP_URL']);
 }
 
-// Sanitize database username to lowercase 'root' if it was set to uppercase 'ROOT'
+// Sanitize database username to lowercase 'root'
 if (isset($_ENV['DB_USERNAME']) && strtoupper($_ENV['DB_USERNAME']) === 'ROOT') {
     $_ENV['DB_USERNAME'] = 'root';
     putenv('DB_USERNAME=root');
@@ -24,14 +63,12 @@ if (isset($_ENV['DB_USERNAME']) && strtoupper($_ENV['DB_USERNAME']) === 'ROOT') 
 // Create temporary storage directories in /tmp for Vercel Serverless environment
 $tmpStorage = '/tmp/storage';
 
-$directories = [
+foreach ([
     $tmpStorage . '/framework/views',
     $tmpStorage . '/framework/cache/data',
     $tmpStorage . '/framework/sessions',
     $tmpStorage . '/logs',
-];
-
-foreach ($directories as $dir) {
+] as $dir) {
     if (!is_dir($dir)) {
         @mkdir($dir, 0755, true);
     }
