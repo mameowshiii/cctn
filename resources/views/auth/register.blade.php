@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - CCTN Bantayan</title>
+    <link rel="icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <style>
+        body { background: #f8fafc; min-height: 100vh; overflow-x: hidden; margin: 0; }
+        .auth-layout { display: flex; min-height: 100vh; width: 100%; }
+        .auth-left { width: 45%; background: #ffffff; position: relative; display: flex; flex-direction: column; justify-content: space-between; position: fixed; top:0; left:0; height:100vh;}
+        .auth-left::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, #ffffff 45%, rgba(255,255,255,0.8) 65%, rgba(255,255,255,0) 100%); z-index: 1; pointer-events: none; }
+        .auth-left-content { padding: 4rem 4rem 6rem 4rem; position: relative; z-index: 2; }
+        .auth-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; margin-bottom: 3rem; }
+        .auth-logo-img { width: 44px; height: 44px; object-fit: contain; }
+        .auth-logo-name { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; color: var(--primary); display: block; line-height: 1; }
+        .auth-logo-sub { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; }
+        .auth-title { font-family: var(--font-heading); font-size: 3rem; font-weight: 800; line-height: 1.1; color: #0f172a; margin-bottom: 1.5rem; }
+        .auth-subtitle { color: var(--text-body); font-size: 1.05rem; line-height: 1.6; max-width: 420px; margin-bottom: 2.5rem; }
+        .auth-image { position: absolute; bottom: 0; right: 0; width: 100%; height: calc(100% - 60px); z-index: 0; pointer-events: none; }
+        .auth-image img { width: 100%; height: 100%; object-fit: cover; object-position: right bottom; }
+        
+        .auth-right { width: 55%; margin-left:45%; background: #f8fafc; display: flex; flex-direction: column; align-items: center; position: relative; padding: 4rem 2rem 6rem 2rem; min-height: 100vh;}
+        .auth-back-link { position: absolute; top: 2rem; right: 2rem; display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-muted); text-decoration: none; font-weight: 700; font-size: 0.88rem; transition: color 0.2s; z-index: 10; }
+        .auth-back-link:hover { color: var(--primary); }
+        .auth-form-card { background: #fff; width: 100%; max-width: 700px; border-radius: 20px; padding: 3rem 2.5rem; box-shadow: 0 20px 40px rgba(0,0,0,0.04); border: 1px solid #e5e7eb; position: relative; z-index: 2; margin-top:2rem;}
+        .auth-form-title { text-align: center; font-family: system-ui, sans-serif; font-size: 1.6rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; }
+        .auth-form-sub { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.25rem; margin-bottom: 1.5rem; }
+        .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem 1.25rem; margin-bottom: 1.5rem; }
+        .form-full { grid-column: 1 / -1; }
+        
+        .auth-input-group label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.5rem; }
+        .auth-input { width: 100%; padding: 0.8rem 1rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; color: var(--text-dark); transition: border-color 0.2s; box-sizing: border-box;}
+        .auth-input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(220,38,38,0.1); }
+        select.auth-input { background: #fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 1rem center; -webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 2.5rem; }
+
+        .form-section-title { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #f1f5f9; display: flex; align-items: center; gap: 0.5rem; }
+        
+        .btn-auth-primary { width: 100%; background: var(--primary); color: #fff; padding: 1rem; border-radius: 8px; font-weight: 700; font-size: 1.05rem; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 0.5rem; box-shadow: 0 4px 12px rgba(220,38,38,0.25); transition: background 0.2s, transform 0.2s; margin-top: 2rem; }
+        .btn-auth-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .auth-login-link { text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted); }
+        .auth-login-link a { color: var(--primary); font-weight: 700; text-decoration: none; }
+        .auth-login-link a:hover { text-decoration: underline; }
+
+        @media (max-width: 1024px) {
+            .auth-layout { flex-direction: column; }
+            .auth-left { position: static; width: 100%; height: auto; min-height: 40vh; }
+            .auth-right { margin-left: 0; width: 100%; padding: 2rem 1.5rem; }
+            .auth-image { display: none; }
+            .form-grid-3 { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="auth-layout">
+    <div class="auth-left">
+        <div class="auth-left-content">
+            <a href="{{ route('home') }}" class="auth-logo">
+                <img src="{{ asset('assets/images/cctn-logo.png') }}" alt="CCTN" class="auth-logo-img">
+                <div>
+                    <span class="auth-logo-name">CCTN</span>
+                    <span class="auth-logo-sub">Bantayan</span>
+                </div>
+            </a>
+            
+            <h1 class="auth-title">
+                Create Your<br>
+                <span class="text-primary" style="color: #dc2626;">Account</span>
+            </h1>
+            <p class="auth-subtitle">
+                Join CCTN Bantayan today. Book your Fiber WiFi installation and manage your subscription easily from our client portal.
+            </p>
+        </div>
+        
+        <div class="auth-image">
+            <img src="{{ asset('assets/images/bg-office.jpg') }}" alt="Office">
+        </div>
+    </div>
+    
+    <div class="auth-right">
+        <a href="{{ route('home') }}" class="auth-back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back to Home
+        </a>
+        <div class="auth-form-card">
+            <h2 class="auth-form-title">Client Registration</h2>
+            <p class="auth-form-sub">Please fill in your details accurately to create an account.</p>
+
+            @if ($errors->any())
+                <div style="background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; padding: 1rem; border-radius: 8px; font-size: 0.85rem; margin-bottom: 1.5rem;">
+                    <ul style="margin: 0; padding-left: 1.2rem;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('register.submit') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    Personal Information
+                </div>
+
+                <div class="form-grid-3">
+                    <div class="auth-input-group">
+                        <label>First Name *</label>
+                        <input type="text" name="firstname" class="auth-input" value="{{ old('firstname') }}" required>
+                    </div>
+                    <div class="auth-input-group">
+                        <label>Middle Name</label>
+                        <input type="text" name="middlename" class="auth-input" value="{{ old('middlename') }}">
+                    </div>
+                    <div class="auth-input-group">
+                        <label>Last Name *</label>
+                        <input type="text" name="lastname" class="auth-input" value="{{ old('lastname') }}" required>
+                    </div>
+                </div>
+
+                <div class="form-grid-3">
+                    <div class="auth-input-group">
+                        <label>Birth Date *</label>
+                        <input type="date" name="birthdate" id="birthdate" class="auth-input" value="{{ old('birthdate') }}" required>
+                    </div>
+                    <div class="auth-input-group">
+                        <label>Age *</label>
+                        <input type="number" name="age" id="age" class="auth-input" value="{{ old('age') }}" readonly style="background:#f1f5f9; cursor:not-allowed;">
+                    </div>
+                    <div class="auth-input-group">
+                        <label>Gender *</label>
+                        <select name="gender" class="auth-input" required>
+                            <option value="">Select Gender</option>
+                            <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male</option>
+                            <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="auth-input-group">
+                        <label>Place of Birth</label>
+                        <input type="text" name="place_of_birth" class="auth-input" value="{{ old('place_of_birth') }}">
+                    </div>
+                    <div class="auth-input-group">
+                        <label>Civil Status *</label>
+                        <select name="civil_status" class="auth-input" required>
+                            <option value="">Select Status</option>
+                            <option value="Single" {{ old('civil_status') == 'Single' ? 'selected' : '' }}>Single</option>
+                            <option value="Married" {{ old('civil_status') == 'Married' ? 'selected' : '' }}>Married</option>
+                            <option value="Widowed" {{ old('civil_status') == 'Widowed' ? 'selected' : '' }}>Widowed</option>
+                            <option value="Legally Separated" {{ old('civil_status') == 'Legally Separated' ? 'selected' : '' }}>Legally Separated</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Contact & Address
+                </div>
+
+                <div class="form-grid">
+                    <div class="auth-input-group">
+                        <label>Mobile Number *</label>
+                        <input type="text" name="contact_no" class="auth-input" placeholder="e.g. 09123456789" value="{{ old('contact_no') }}" required>
+                    </div>
+                    <div class="auth-input-group">
+                        <label>Email Address *</label>
+                        <input type="email" name="email" class="auth-input" value="{{ old('email') }}" required>
+                    </div>
+                </div>
+
+                <div class="form-grid-3">
+                    <div class="auth-input-group">
+                        <label>Province *</label>
+                        <input type="text" name="address_province" class="auth-input" value="Cebu" readonly style="background:#f1f5f9;">
+                    </div>
+                    <div class="auth-input-group">
+                        <label>Municipality *</label>
+                        <input type="text" name="address_municipality" class="auth-input" value="Bantayan" readonly style="background:#f1f5f9;">
+                    </div>
+                    <div class="auth-input-group">
+                        <label>Barangay *</label>
+                        <select name="address_barangay" class="auth-input" required>
+                            <option value="">Select Brgy</option>
+                            @php
+                                $brgys = ['Atop-atop','Baigad','Bantigue','Baod','Binaobao','Botigues','Doong','Guiwanon','Hilotongan','Kabac','Kabangbang','Kampingganon','Kangkaibe','Lipayran','Luyongbaybay','Mojon','Obo-ob','Patao','Puting Bato','Sillion','Suba','Sulangan','Sungko','Ticad'];
+                            @endphp
+                            @foreach ($brgys as $brgy)
+                                <option value="{{ $brgy }}" {{ old('address_barangay') == $brgy ? 'selected' : '' }}>{{ $brgy }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    Account Credentials
+                </div>
+
+                <div class="form-grid">
+                    <div class="auth-input-group">
+                        <label>Username *</label>
+                        <input type="text" name="username" class="auth-input" value="{{ old('username') }}" required>
+                    </div>
+                    <div class="auth-input-group">
+                        <label>Profile Photo (Optional)</label>
+                        <input type="file" name="profile_photo" class="auth-input" accept="image/png, image/jpeg, image/webp" style="padding: 0.6rem;">
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="auth-input-group">
+                        <label>Password *</label>
+                        <input type="password" name="password" class="auth-input" minlength="8" required>
+                    </div>
+                    <div class="auth-input-group">
+                        <label>Confirm Password *</label>
+                        <input type="password" name="password_confirmation" class="auth-input" minlength="8" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-auth-primary">
+                    Create Account
+                </button>
+
+                <div class="auth-login-link">
+                    Already have an account? <a href="{{ route('login') }}">Sign In Here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('birthdate').addEventListener('change', function() {
+        var dob = new Date(this.value);
+        if(!isNaN(dob)) {
+            var today = new Date();
+            var age = today.getFullYear() - dob.getFullYear();
+            var m = today.getMonth() - dob.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            document.getElementById('age').value = age;
+        }
+    });
+</script>
+</body>
+</html>

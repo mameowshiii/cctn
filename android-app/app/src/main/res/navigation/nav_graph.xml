@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <!-- Auth -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.cctn.app.ui.auth.LoginFragment"
+        android:label="Login">
+        <action android:id="@+id/action_loginFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <action android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.cctn.app.ui.auth.RegisterFragment"
+        android:label="Register">
+        <action android:id="@+id/action_registerFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- Main (bottom nav) -->
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.cctn.app.ui.dashboard.DashboardFragment"
+        android:label="Dashboard">
+        <action android:id="@+id/action_dashboardFragment_to_bookFragment"
+            app:destination="@id/bookFragment" />
+        <action android:id="@+id/action_dashboardFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/appointmentsFragment"
+        android:name="com.cctn.app.ui.appointments.AppointmentsFragment"
+        android:label="Appointments">
+        <action android:id="@+id/action_appointmentsFragment_to_bookFragment"
+            app:destination="@id/bookFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookFragment"
+        android:name="com.cctn.app.ui.appointments.BookFragment"
+        android:label="Book Appointment" />
+
+    <fragment
+        android:id="@+id/billingFragment"
+        android:name="com.cctn.app.ui.billing.BillingFragment"
+        android:label="Billing" />
+
+    <fragment
+        android:id="@+id/maintenanceFragment"
+        android:name="com.cctn.app.ui.maintenance.MaintenanceFragment"
+        android:label="Maintenance" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.cctn.app.ui.profile.ProfileFragment"
+        android:label="Profile" />
+
+</navigation>
