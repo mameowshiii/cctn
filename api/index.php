@@ -1,13 +1,19 @@
 <?php
 
-// Enable error display to diagnose Vercel errors
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Suppress Symfony and Termwind E_DEPRECATED warnings on PHP 8.4
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+ini_set('display_errors', 0); // Disable error output to users in production
 
 // Force log channel to stderr to prevent read-only filesystem errors on Vercel
 $_ENV['LOG_CHANNEL'] = 'stderr';
 putenv('LOG_CHANNEL=stderr');
+
+// Dynamically set APP_URL to match the current Vercel request host for assets to load properly
+if (isset($_SERVER['HTTP_HOST'])) {
+    $proto = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
+    $_ENV['APP_URL'] = $proto . '://' . $_SERVER['HTTP_HOST'];
+    putenv('APP_URL=' . $_ENV['APP_URL']);
+}
 
 // Sanitize database username to lowercase 'root' if it was set to uppercase 'ROOT'
 if (isset($_ENV['DB_USERNAME']) && strtoupper($_ENV['DB_USERNAME']) === 'ROOT') {
