@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dashboardFragment"
+        android:icon="@mipmap/ic_launcher"
+        android:title="Home" />
+    <item
+        android:id="@+id/appointmentsFragment"
+        android:icon="@mipmap/ic_launcher"
+        android:title="Appointments" />
+    <item
+        android:id="@+id/billingFragment"
+        android:icon="@mipmap/ic_launcher"
+        android:title="Billing" />
+    <item
+        android:id="@+id/maintenanceFragment"
+        android:icon="@mipmap/ic_launcher"
+        android:title="Maintenance" />
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@mipmap/ic_launcher"
+        android:title="Profile" />
+</menu>
