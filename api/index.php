@@ -1,9 +1,19 @@
 <?php
 
-// Enable error display to diagnose Vercel HTTP 500 errors
+// Enable error display to diagnose Vercel errors
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+// Force log channel to stderr to prevent read-only filesystem errors on Vercel
+$_ENV['LOG_CHANNEL'] = 'stderr';
+putenv('LOG_CHANNEL=stderr');
+
+// Sanitize database username to lowercase 'root' if it was set to uppercase 'ROOT'
+if (isset($_ENV['DB_USERNAME']) && strtoupper($_ENV['DB_USERNAME']) === 'ROOT') {
+    $_ENV['DB_USERNAME'] = 'root';
+    putenv('DB_USERNAME=root');
+}
 
 // Create temporary storage directories in /tmp for Vercel Serverless environment
 $tmpStorage = '/tmp/storage';
