@@ -1,5 +1,10 @@
 <?php
 
+// Enable error display to diagnose Vercel HTTP 500 errors
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Create temporary storage directories in /tmp for Vercel Serverless environment
 $tmpStorage = '/tmp/storage';
 
