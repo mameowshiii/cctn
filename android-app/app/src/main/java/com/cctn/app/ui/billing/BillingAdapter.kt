@@ -32,6 +32,23 @@ class BillingAdapter : ListAdapter<BillingModel, BillingAdapter.ViewHolder>(Diff
                 else      -> R.color.status_pending
             }
             b.tvStatus.setTextColor(ContextCompat.getColor(b.root.context, statusColor))
+
+            // Provide seamless browser redirect to the official CCTN billing page for easy in-app payments
+            if (bill.status.lowercase() != "paid") {
+                b.root.setOnClickListener {
+                    val context = b.root.context
+                    try {
+                        val intent = android.content.Intent(android.content.Intent.ACTION_VIEW)
+                        intent.data = android.net.Uri.parse("https://cctn-two.vercel.app/billing")
+                        context.startActivity(intent)
+                        android.widget.Toast.makeText(context, "Redirecting to secure billing checkout...", android.widget.Toast.LENGTH_SHORT).show()
+                    } catch (e: Exception) {
+                        android.widget.Toast.makeText(context, "Could not open browser. Please visit the website.", android.widget.Toast.LENGTH_LONG).show()
+                    }
+                }
+            } else {
+                b.root.setOnClickListener(null)
+            }
         }
     }
 

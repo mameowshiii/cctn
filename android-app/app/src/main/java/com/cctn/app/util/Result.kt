@@ -19,12 +19,32 @@ suspend fun <T> safeApiCall(call: suspend () -> Response<T>): Result<T> {
                 Result.Error("Empty response body", response.code())
             }
         } else {
-            Result.Error(
-                response.errorBody()?.string() ?: "Server error",
-                response.code()
-            )
+            val errorBodyString = response.errorBody()?.string()
+            val cleanMessage = parseErrorMessage(errorBodyString)
+            Result.Error(cleanMessage, response.code())
         }
     } catch (e: Exception) {
         Result.Error(e.message ?: "Network error")
+    }
+}
+
+private fun parseErrorMessage(errorBody: String?): String {
+    if (errorBody.isNullOrEmpty()) return "Server error"
+    return try {
+        val jsonObject = org.json.JSONObject(errorBody)
+        if (jsonObject.has("errors")) {
+            val errorsObj = jsonObject.getJSONObject("errors")
+            val keys = errorsObj.keys()
+            if (keys.hasNext()) {
+                val firstKey = keys.next()
+                val errorsArray = errorsObj.getJSONArray(firstKey)
+                if (errorsArray.length() > 0) {
+                    return errorsArray.getString(0)
+                }
+            }
+        }
+        jsonObject.optString("message", "Server error")
+    } catch (e: Exception) {
+        errorBody
     }
 }
