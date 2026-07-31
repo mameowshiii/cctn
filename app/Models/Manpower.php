@@ -9,5 +9,7 @@ class Manpower extends Model
 {
     use HasFactory;
 
+    protected $table = 'manpower';
+
     protected $fillable = ['name', 'role', 'availability', 'notes'];
 }
