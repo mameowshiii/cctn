@@ -15,13 +15,25 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create Account"
-            android:textSize="28sp"
+            android:text="Client Registration"
+            android:textSize="26sp"
             android:textStyle="bold"
             android:textColor="@color/on_surface"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="24dp" />
+
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please fill in your details accurately to create an account."
+            android:textSize="13sp"
+            android:textColor="@color/on_surface_variant"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilFirstname"
@@ -29,11 +41,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="First Name *"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tilLastname"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="20dp">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etFirstname"
                 android:layout_width="match_parent"
@@ -46,11 +58,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="Last Name *"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
             app:layout_constraintStart_toEndOf="@id/tilFirstname"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="20dp">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etLastname"
                 android:layout_width="match_parent"
