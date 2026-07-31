@@ -90,5 +90,9 @@ putenv('APP_PACKAGES_CACHE=/tmp/packages.php');
 putenv('APP_ROUTES_CACHE=/tmp/routes.php');
 putenv('APP_SERVICES_CACHE=/tmp/services.php');
 
+// Force SCRIPT_NAME to root to fix Laravel's base URL detection and routing on Vercel
+$_SERVER['SCRIPT_NAME'] = '/index.php';
+$_SERVER['PHP_SELF']     = '/index.php';
+
 // Forward request to Laravel's public/index.php
 require __DIR__ . '/../public/index.php';
