@@ -20,7 +20,7 @@ android {
 
         // Change this to your server IP when testing on a physical device.
         // For the Android emulator, 10.0.2.2 maps to the host machine's localhost.
-        buildConfigField("String", "BASE_URL", "\"http://10.0.2.2/cctn-laravel/public/api/v1/\"")
+        buildConfigField("String", "BASE_URL", "\"https://cctn-two.vercel.app/api/v1/\"")
     }
 
     buildTypes {
@@ -28,7 +28,7 @@ android {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             // Override for production
-            buildConfigField("String", "BASE_URL", "\"https://YOUR_DOMAIN/cctn-laravel/public/api/v1/\"")
+            buildConfigField("String", "BASE_URL", "\"https://cctn-two.vercel.app/api/v1/\"")
         }
     }
 
