@@ -73,4 +73,53 @@ class ApiRegistrationTest extends TestCase
         $response2->assertStatus(422)
                   ->assertJsonValidationErrors(['email', 'username']);
     }
+
+    public function test_user_can_register_via_api_and_login_via_web_and_vice_versa()
+    {
+        // Disable CSRF verification for web route testing
+        $this->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
+
+        // ─── Scenario A: Register via API, Login via Web ───
+        $this->postJson('/api/v1/auth/register', [
+            'firstname'            => 'Api',
+            'lastname'             => 'User',
+            'email'                => 'apiuser@example.com',
+            'username'             => 'apiuser',
+            'password'             => 'password123',
+            'password_confirmation'=> 'password123',
+            'contact_no'           => '09123456789',
+            'address_barangay'     => 'San Vicente',
+            'address_municipality' => 'Bantayan',
+            'address_province'     => 'Cebu',
+        ])->assertStatus(201);
+
+        $responseWebLogin = $this->post('/login', [
+            'login_input' => 'apiuser',
+            'password'    => 'password123',
+        ]);
+        $responseWebLogin->assertRedirect(route('client.dashboard'));
+
+        // ─── Scenario B: Register via Web, Login via API ───
+        $this->post('/register', [
+            'firstname'            => 'Web',
+            'lastname'             => 'User',
+            'email'                => 'webuser@example.com',
+            'username'             => 'webuser',
+            'password'             => 'password123',
+            'password_confirmation'=> 'password123',
+            'contact_no'           => '09123456789',
+            'address_barangay'     => 'San Vicente',
+            'address_municipality' => 'Bantayan',
+            'address_province'     => 'Cebu',
+        ])->assertRedirect(route('client.dashboard'));
+
+        $responseApiLogin = $this->postJson('/api/v1/auth/login', [
+            'login_input' => 'webuser',
+            'password'    => 'password123',
+        ]);
+        $responseApiLogin->assertStatus(200)
+                         ->assertJsonStructure([
+                             'success', 'token', 'client'
+                         ]);
+    }
 }
