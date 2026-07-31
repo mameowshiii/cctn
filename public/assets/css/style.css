@@ -1884,67 +1884,229 @@ body.admin-dashboard-page .admin-main-wrapper > footer {
     justify-content: center;
     align-items: center;
 }
-/* Phone Mockup */
+/* Phone Mockup & Visual Decoration */
+.lp-download-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.lp-visual-glow-orb {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(220,38,38,0.12) 0%, rgba(220,38,38,0) 70%);
+    border-radius: 50%;
+    z-index: 1;
+    filter: blur(20px);
+    pointer-events: none;
+}
 .phone-mockup {
     width: 280px;
     height: 500px;
     background: #0f172a;
     border: 12px solid #1e293b;
-    border-radius: 36px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+    border-radius: 40px;
+    box-shadow: 0 25px 60px rgba(15,23,42,0.22), 0 0 0 1px rgba(255,255,255,0.05) inset;
     position: relative;
     overflow: hidden;
+    z-index: 2;
+    transition: transform 0.3s ease;
 }
-.phone-mockup::before {
-    content: '';
+.phone-mockup:hover {
+    transform: translateY(-5px) rotate(1deg);
+}
+/* Camera Notch (Dynamic Island) */
+.phone-notch {
     position: absolute;
-    top: 0;
+    top: 6px;
     left: 50%;
     transform: translateX(-50%);
-    width: 140px;
-    height: 18px;
-    background: #1e293b;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+    width: 76px;
+    height: 16px;
+    background: #000;
+    border-radius: 12px;
+    z-index: 60;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.1);
+}
+/* Glass Reflection Overlay */
+.phone-glare {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 50%);
+    pointer-events: none;
     z-index: 50;
 }
 .phone-screen {
     width: 100%;
     height: 100%;
-    background: #f1f5f9;
+    background: #f8fafc;
     display: flex;
     flex-direction: column;
     position: relative;
 }
 .phone-status-bar {
-    height: 32px;
+    height: 34px;
     background: #0f172a;
-    padding: 10px 1.25rem 0;
+    padding: 12px 1.15rem 0;
     display: flex;
     justify-content: space-between;
-    font-size: 0.65rem;
-    color: #fff;
+    align-items: center;
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.9);
     font-weight: 600;
     z-index: 40;
 }
+.phone-icons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
 .phone-app-header {
-    background: #dc2626;
-    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    padding: 0.9rem 1.15rem 0.75rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    box-shadow: 0 4px 12px rgba(153,27,27,0.15);
 }
 .phone-app-body {
-    padding: 1rem;
+    padding: 0.85rem;
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 0.65rem;
+}
+.mock-status-pill {
+    background: #f1f5f9;
+    border-radius: 20px;
+    padding: 0.4rem 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    border: 1px solid #e2e8f0;
+    align-self: flex-start;
+}
+.pulse-indicator {
+    width: 6px;
+    height: 6px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 0 rgba(34,197,94,0.7);
+    animation: mock-pulse 1.6s infinite;
+}
+@keyframes mock-pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34,197,94,0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 5px rgba(34,197,94,0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34,197,94,0);
+    }
 }
 .mock-card {
     background: #fff;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 0.75rem;
-    margin-bottom: 0.75rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 12px rgba(15,23,42,0.03);
     border: 1px solid #e2e8f0;
+    transition: transform 0.2s ease;
+}
+.mock-plan-card {
+    background: linear-gradient(to bottom, #ffffff, #fafafa);
+    border-left: 4px solid #dc2626;
+}
+.mock-label {
+    font-size: 0.55rem;
+    font-weight: 800;
+    color: #64748b;
+    letter-spacing: 0.8px;
+}
+.mock-plan-title {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0.1rem 0 0;
+}
+.mock-plan-badge {
+    font-size: 0.55rem;
+    font-weight: 800;
+    color: #dc2626;
+    background: rgba(220,38,38,0.08);
+    padding: 3px 8px;
+    border-radius: 12px;
+}
+.mock-progress-bar {
+    width: 100%;
+    height: 5px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+.mock-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #dc2626 0%, #ef4444 100%);
+    border-radius: 3px;
+}
+.mock-actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem;
+}
+.mock-action-btn {
+    border-radius: 8px;
+    padding: 0.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+.mock-action-btn svg {
+    margin-bottom: 1px;
+}
+.mock-action-btn span {
+    font-size: 0.55rem;
+    font-weight: 700;
+}
+.action-pay {
+    background: rgba(15,23,42,0.04);
+    color: #0f172a;
+}
+.action-pay:hover {
+    background: rgba(15,23,42,0.08);
+}
+.action-support {
+    background: rgba(220,38,38,0.04);
+    color: #dc2626;
+}
+.action-support:hover {
+    background: rgba(220,38,38,0.08);
+}
+.action-speed {
+    background: rgba(30,58,138,0.04);
+    color: #1e3a8a;
+}
+.action-speed:hover {
+    background: rgba(30,58,138,0.08);
+}
+.action-install {
+    background: rgba(101,163,13,0.04);
+    color: #65a30d;
+}
+.action-install:hover {
+    background: rgba(101,163,13,0.08);
 }

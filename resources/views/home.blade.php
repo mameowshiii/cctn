@@ -187,34 +187,76 @@
                 </div>
             </div>
             <div class="lp-download-visual">
+                <!-- Glowing background decoration -->
+                <div class="lp-visual-glow-orb"></div>
                 <!-- Phone mockup container -->
                 <div class="phone-mockup">
+                    <!-- Glass Reflection Overlay -->
+                    <div class="phone-glare"></div>
+                    <!-- Camera Notch (Dynamic Island Style) -->
+                    <div class="phone-notch"></div>
+                    
                     <div class="phone-screen">
+                        <!-- Status Bar -->
                         <div class="phone-status-bar">
-                            <span>9:41 AM</span>
-                            <span>⚡ 100%</span>
+                            <span class="phone-time">9:41 AM</span>
+                            <span class="phone-icons">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M5 13a10 10 0 0 1 14 0"/><path d="M1.5 9.5a15 15 0 0 1 21 0"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6v16h-4V6h4zm-5.5 4v12h-4V10h4zM12 14v8H8v-8h4zM6.5 17v5h-4v-5h4z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"/><line x1="22" y1="11" x2="22" y2="13"/></svg>
+                            </span>
                         </div>
+                        <!-- App Header -->
                         <div class="phone-app-header">
-                            <img src="{{ asset('assets/images/cctn-logo.png') }}" alt="CCTN Logo" style="height: 24px; filter: brightness(0) invert(1);">
-                            <span style="font-weight: 800; font-size: 0.9rem; color: #fff;">CCTN Mobile</span>
+                            <img src="{{ asset('assets/images/cctn-logo.png') }}" alt="CCTN Logo" style="height: 20px; filter: brightness(0) invert(1);">
+                            <span style="font-weight: 800; font-size: 0.85rem; color: #fff; letter-spacing: 0.5px;">CCTN Mobile</span>
                         </div>
+                        <!-- App Body -->
                         <div class="phone-app-body">
-                            <div style="background: rgba(220,38,38,0.06); border-radius: 8px; padding: 0.75rem; text-align: center; border: 1px solid rgba(220,38,38,0.12); margin-bottom: 0.75rem;">
-                                <strong style="color: #dc2626; font-size: 0.75rem; display: block;">FIBER STATUS</strong>
-                                <span style="font-size: 0.7rem; color: #15803d; font-weight: 700;">🟢 Connected (Active)</span>
+                            <!-- Network Status Card -->
+                            <div class="mock-status-pill">
+                                <span class="pulse-indicator"></span>
+                                <span style="font-size: 0.68rem; color: #1e293b; font-weight: 700;">Fiber Connection: Active</span>
                             </div>
-                            <div class="mock-card">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="font-size: 0.75rem; font-weight: 700; color: #0f172a;">Current Plan</span>
-                                    <span style="font-size: 0.65rem; font-weight: 800; color: #dc2626; background: rgba(220,38,38,0.08); padding: 2px 6px; border-radius: 20px;">10 Mbps</span>
+
+                            <!-- Subscription Card -->
+                            <div class="mock-card mock-plan-card">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem;">
+                                    <div>
+                                        <span class="mock-label">CURRENT PLAN</span>
+                                        <h4 class="mock-plan-title">Standard Fiber</h4>
+                                    </div>
+                                    <span class="mock-plan-badge">10 Mbps</span>
                                 </div>
-                                <div style="font-size: 0.65rem; color: #64748b; margin-top: 0.25rem;">Next Payment: Aug 15</div>
+                                <div class="mock-progress-bar">
+                                    <div class="mock-progress-fill" style="width: 78%;"></div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.58rem; color: #64748b; margin-top: 0.25rem;">
+                                    <span>Usage: 78 GB / Unlimited</span>
+                                    <span style="font-weight: 700; color: #dc2626;">Pay: Aug 15</span>
+                                </div>
                             </div>
-                            <div class="mock-card">
-                                <span style="font-size: 0.75rem; font-weight: 700; display: block; margin-bottom: 0.35rem; color: #0f172a;">Quick Actions</span>
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem;">
-                                    <div style="background: #0f172a; color: #fff; text-align: center; padding: 0.35rem; border-radius: 4px; font-size: 0.62rem; font-weight: 700;">Pay Bills</div>
-                                    <div style="background: #dc2626; color: #fff; text-align: center; padding: 0.35rem; border-radius: 4px; font-size: 0.62rem; font-weight: 700;">Support</div>
+
+                            <!-- Quick Action Grid -->
+                            <div class="mock-card" style="padding: 0.65rem 0.75rem;">
+                                <span class="mock-label" style="display: block; margin-bottom: 0.45rem;">QUICK ACTIONS</span>
+                                <div class="mock-actions-grid">
+                                    <div class="mock-action-btn action-pay">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"/><line x1="12" y1="17" x2="12" y2="17"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                                        <span>Pay Bills</span>
+                                    </div>
+                                    <div class="mock-action-btn action-support">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                        <span>Support</span>
+                                    </div>
+                                    <div class="mock-action-btn action-speed">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" y="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                        <span>Speed Test</span>
+                                    </div>
+                                    <div class="mock-action-btn action-install">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                        <span>Bookings</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
