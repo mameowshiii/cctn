@@ -8,7 +8,7 @@
     <meta name="description" content="Book appointments and broadcasting services online for Cine Cebu Television Network - Bantayan Branch.">
     
     <link rel="icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ filemtime(public_path('assets/css/style.css')) }}">
     
     @stack('styles')
 </head>
