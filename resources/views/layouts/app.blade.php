@@ -26,6 +26,7 @@
 
             <ul class="lp-nav-links" id="lp-nav-menu">
                 <li><a href="{{ route('home') }}" class="lp-nav-link {{ request()->routeIs('home') ? 'lp-nav-active' : '' }}">Home</a></li>
+                <li><a href="{{ route('home') }}#download" class="lp-nav-link">Mobile App</a></li>
 
                 @auth('client')
                     <li><a href="{{ route('client.dashboard') }}" class="lp-nav-link {{ request()->routeIs('client.dashboard') ? 'lp-nav-active' : '' }}">My Dashboard</a></li>

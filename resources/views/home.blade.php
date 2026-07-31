@@ -154,6 +154,77 @@
     </div>
 </section>
 
+<!-- ========== MOBILE DOWNLOAD SECTION ========== -->
+<section class="lp-download-section" id="download">
+    <div class="container">
+        <div class="lp-download-inner">
+            <div class="lp-download-copy">
+                <div class="lp-section-label">GO MOBILE</div>
+                <h2 class="lp-section-title">Download Our Android Application</h2>
+                <div class="lp-section-divider" style="margin-left: 0;"></div>
+                <p class="lp-section-sub" style="margin-left: 0; text-align: left;">
+                    Manage your bookings, view your billing accounts, pay bills, and coordinate technician installations on the go with our official CCTN mobile companion app.
+                </p>
+                <div class="lp-download-features">
+                    <div class="lp-dl-feat-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span>Real-time Installation Booking</span>
+                    </div>
+                    <div class="lp-dl-feat-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span>Billing Status & Payment History</span>
+                    </div>
+                    <div class="lp-dl-feat-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span>24/7 Technician Dispatch Requests</span>
+                    </div>
+                </div>
+                <div style="margin-top: 2rem;">
+                    <a href="{{ asset('downloads/cctn-app.apk') }}" class="lp-btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;" download>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download Android App (APK)
+                    </a>
+                </div>
+            </div>
+            <div class="lp-download-visual">
+                <!-- Phone mockup container -->
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="phone-status-bar">
+                            <span>9:41 AM</span>
+                            <span>⚡ 100%</span>
+                        </div>
+                        <div class="phone-app-header">
+                            <img src="{{ asset('assets/images/cctn-logo.png') }}" alt="CCTN Logo" style="height: 24px; filter: brightness(0) invert(1);">
+                            <span style="font-weight: 800; font-size: 0.9rem; color: #fff;">CCTN Mobile</span>
+                        </div>
+                        <div class="phone-app-body">
+                            <div style="background: rgba(220,38,38,0.06); border-radius: 8px; padding: 0.75rem; text-align: center; border: 1px solid rgba(220,38,38,0.12); margin-bottom: 0.75rem;">
+                                <strong style="color: #dc2626; font-size: 0.75rem; display: block;">FIBER STATUS</strong>
+                                <span style="font-size: 0.7rem; color: #15803d; font-weight: 700;">🟢 Connected (Active)</span>
+                            </div>
+                            <div class="mock-card">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 0.75rem; font-weight: 700; color: #0f172a;">Current Plan</span>
+                                    <span style="font-size: 0.65rem; font-weight: 800; color: #dc2626; background: rgba(220,38,38,0.08); padding: 2px 6px; border-radius: 20px;">10 Mbps</span>
+                                </div>
+                                <div style="font-size: 0.65rem; color: #64748b; margin-top: 0.25rem;">Next Payment: Aug 15</div>
+                            </div>
+                            <div class="mock-card">
+                                <span style="font-size: 0.75rem; font-weight: 700; display: block; margin-bottom: 0.35rem; color: #0f172a;">Quick Actions</span>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem;">
+                                    <div style="background: #0f172a; color: #fff; text-align: center; padding: 0.35rem; border-radius: 4px; font-size: 0.62rem; font-weight: 700;">Pay Bills</div>
+                                    <div style="background: #dc2626; color: #fff; text-align: center; padding: 0.35rem; border-radius: 4px; font-size: 0.62rem; font-weight: 700;">Support</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ========== TROUBLESHOOT SECTION ========== -->
 <section class="lp-trouble-section">
     <div class="container">
