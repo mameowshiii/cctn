@@ -17,7 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="16dp"
-            app:cardElevation="2dp">
+            app:cardBackgroundColor="@color/dark_card_bg"
+            app:strokeWidth="0dp"
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,26 +45,26 @@
                         android:id="@+id/tvWelcome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Welcome!"
+                        android:text="Hello, Jane! 👋"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="@color/on_surface" />
+                        android:textColor="@color/dark_card_title" />
 
                     <TextView
                         android:id="@+id/tvAccountNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Account #"
+                        android:text="CCTN-2026-0003"
                         android:textSize="13sp"
-                        android:textColor="@color/on_surface_variant" />
+                        android:textColor="@color/dark_card_subtitle" />
 
                     <TextView
                         android:id="@+id/tvEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="email@example.com"
+                        android:text="jane@gmail.com"
                         android:textSize="13sp"
-                        android:textColor="@color/on_surface_variant" />
+                        android:textColor="@color/dark_card_subtitle" />
                 </LinearLayout>
 
                 <ImageButton
@@ -96,6 +98,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="6dp"
+                app:cardBackgroundColor="@color/dark_card_bg"
+                app:strokeWidth="0dp"
+                app:cardElevation="0dp"
                 app:cardCornerRadius="12dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -109,13 +114,13 @@
                         android:text="0"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:textColor="@color/primary" />
+                        android:textColor="@color/total_red" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Total"
                         android:textSize="12sp"
-                        android:textColor="@color/on_surface_variant" />
+                        android:textColor="@color/dark_card_stat_label" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -125,6 +130,9 @@
                 android:layout_weight="1"
                 android:layout_marginStart="3dp"
                 android:layout_marginEnd="3dp"
+                app:cardBackgroundColor="@color/dark_card_bg"
+                app:strokeWidth="0dp"
+                app:cardElevation="0dp"
                 app:cardCornerRadius="12dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -138,13 +146,13 @@
                         android:text="0"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:textColor="@color/status_pending" />
+                        android:textColor="@color/pending_orange" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pending"
                         android:textSize="12sp"
-                        android:textColor="@color/on_surface_variant" />
+                        android:textColor="@color/dark_card_stat_label" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -153,6 +161,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="6dp"
+                app:cardBackgroundColor="@color/dark_card_bg"
+                app:strokeWidth="0dp"
+                app:cardElevation="0dp"
                 app:cardCornerRadius="12dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -166,13 +177,13 @@
                         android:text="0"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:textColor="@color/status_approved" />
+                        android:textColor="@color/approved_teal" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Approved"
                         android:textSize="12sp"
-                        android:textColor="@color/on_surface_variant" />
+                        android:textColor="@color/dark_card_stat_label" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -183,6 +194,8 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:text="Book New Appointment"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/total_red"
             app:cornerRadius="12dp"
             android:layout_marginTop="24dp" />
 

@@ -3,6 +3,15 @@
     <!-- Base application theme. -->
     <style name="Theme.CCTNApp" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
+        <item name="bottomNavigationStyle">@style/CustomBottomNav</item>
+    </style>
+
+    <style name="CustomBottomNav" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemActiveIndicatorStyle">@style/CustomBottomNavIndicator</item>
+    </style>
+
+    <style name="CustomBottomNavIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/bottom_nav_indicator</item>
     </style>
 
     <!-- Splash Screen theme -->
