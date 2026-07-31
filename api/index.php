@@ -26,6 +26,7 @@ $staticMimeTypes = [
     'json'  => 'application/json',
     'xml'   => 'application/xml',
     'map'   => 'application/json',
+    'apk'   => 'application/vnd.android.package-archive',
 ];
 
 $ext = strtolower(pathinfo($requestUri, PATHINFO_EXTENSION));
