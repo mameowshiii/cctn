@@ -64,19 +64,19 @@ class AuthController extends Controller
         $maxId         = Client::max('id') ?? 0;
         $accountNumber = 'CCTN-' . date('Y') . '-' . str_pad($maxId + 1, 4, '0', STR_PAD_LEFT);
 
-        $birthdate = $request->input('birthdate', '1995-01-01');
+        $birthdate = $request->input('birthdate') ?: '1995-01-01';
         $age       = Carbon::parse($birthdate)->age;
 
         $client = Client::create([
             'account_number'       => $accountNumber,
             'firstname'            => $request->firstname,
-            'middlename'           => $request->input('middlename', ''),
+            'middlename'           => $request->input('middlename') ?: '',
             'lastname'             => $request->lastname,
             'birthdate'            => $birthdate,
             'age'                  => $age,
-            'place_of_birth'       => $request->input('place_of_birth', 'Bantayan, Cebu'),
-            'gender'               => $request->input('gender', 'Prefer not to say'),
-            'civil_status'         => $request->input('civil_status', 'Single'),
+            'place_of_birth'       => $request->input('place_of_birth') ?: 'Bantayan, Cebu',
+            'gender'               => $request->input('gender') ?: 'Prefer not to say',
+            'civil_status'         => $request->input('civil_status') ?: 'Single',
             'address_barangay'     => $request->address_barangay,
             'address_municipality' => $request->address_municipality,
             'address_province'     => $request->address_province,

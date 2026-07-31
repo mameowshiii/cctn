@@ -42,7 +42,8 @@ class RegisterFragment : Fragment() {
             val province   = binding.etProvince.text.toString().trim()
 
             if (firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() ||
-                username.isEmpty() || password.isEmpty() || contactNo.isEmpty()) {
+                username.isEmpty() || password.isEmpty() || contactNo.isEmpty() ||
+                barangay.isEmpty() || municipal.isEmpty() || province.isEmpty()) {
                 Toast.makeText(requireContext(), "Please fill in all required fields.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

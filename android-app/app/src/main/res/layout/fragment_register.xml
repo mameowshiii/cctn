@@ -106,7 +106,7 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Barangay"
+            android:hint="Barangay *"
             app:layout_constraintTop_toBottomOf="@id/tilContactNo"
             android:layout_marginTop="12dp">
             <com.google.android.material.textfield.TextInputEditText
@@ -120,7 +120,7 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Municipality / City"
+            android:hint="Municipality / City *"
             app:layout_constraintTop_toBottomOf="@id/tilBarangay"
             android:layout_marginTop="12dp">
             <com.google.android.material.textfield.TextInputEditText
@@ -134,7 +134,7 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Province"
+            android:hint="Province *"
             app:layout_constraintTop_toBottomOf="@id/tilMunicipality"
             android:layout_marginTop="12dp">
             <com.google.android.material.textfield.TextInputEditText
