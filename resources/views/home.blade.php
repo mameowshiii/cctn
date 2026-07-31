@@ -11,8 +11,8 @@
                 FAST &bull; RELIABLE &bull; UNLIMITED
             </div>
             <h1 class="lp-hero-title">
-                <span class="lp-red">CCTN</span><br>
-                FIBER WIFI<br>
+                <span class="lp-red">CCTN</span><br class="lp-hero-br">
+                FIBER WIFI<br class="lp-hero-br">
                 INSTALLATION &amp; BOOKING
             </h1>
             <p class="lp-hero-sub">
@@ -52,21 +52,27 @@
         <div class="container">
             <div class="lp-features-grid">
                 <div class="lp-feature-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    <div class="lp-feature-icon lp-icon-red">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
                     <div>
                         <strong>High-Speed Fiber</strong>
                         <span>Up to 300 Mbps</span>
                     </div>
                 </div>
                 <div class="lp-feature-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    <div class="lp-feature-icon lp-icon-red">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
                     <div>
                         <strong>Rapid Installation</strong>
                         <span>Book date & time</span>
                     </div>
                 </div>
                 <div class="lp-feature-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <div class="lp-feature-icon lp-icon-red">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
                     <div>
                         <strong>100% Reliable</strong>
                         <span>24/7 Local Support</span>
@@ -109,11 +115,11 @@
                     <ul class="lp-plan-features">
                         <li>
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                            {{ $service->service_name }} Speed
+                            High-Speed Fiber Internet
                         </li>
                         <li>
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                            Unlimited Internet
+                            Unlimited Data (No Capping)
                         </li>
                         @if ($service->description)
                             @foreach (array_slice(array_filter(explode("\n", $service->description)), 0, 3) as $dl)

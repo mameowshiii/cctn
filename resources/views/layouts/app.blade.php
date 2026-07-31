@@ -39,9 +39,9 @@
                     </li>
                     <li><a href="{{ route('client.book') }}" class="lp-btn-nav-book">Book Now</a></li>
                     <li>
-                        <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                        <form action="{{ route('logout') }}" method="POST" style="display:inline; margin: 0; padding: 0;">
                             @csrf
-                            <button type="submit" class="lp-btn-nav-logout" style="border:none; cursor:pointer;">Logout</button>
+                            <button type="submit" class="lp-btn-nav-logout" style="background: none; cursor:pointer;">Logout</button>
                         </form>
                     </li>
                 @else
@@ -63,22 +63,26 @@
     </header>
 
     <main class="lp-main-wrap">
-        @if (session('success_message'))
-            <div class="alert alert-success fade-in">{{ session('success_message') }}</div>
-        @endif
-        @if (session('error_message'))
-            <div class="alert alert-danger fade-in">{{ session('error_message') }}</div>
-        @endif
-        @if (session('redirect_message'))
-            <div class="alert alert-warning fade-in">{{ session('redirect_message') }}</div>
-        @endif
-        @if ($errors->any())
-            <div class="alert alert-danger fade-in">
-                <ul style="margin:0; padding-left:1rem;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+        @if (session('success_message') || session('error_message') || session('redirect_message') || $errors->any())
+            <div class="container" style="margin-top: 1.5rem;">
+                @if (session('success_message'))
+                    <div class="alert alert-success fade-in">{{ session('success_message') }}</div>
+                @endif
+                @if (session('error_message'))
+                    <div class="alert alert-danger fade-in">{{ session('error_message') }}</div>
+                @endif
+                @if (session('redirect_message'))
+                    <div class="alert alert-warning fade-in">{{ session('redirect_message') }}</div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger fade-in">
+                        <ul style="margin:0; padding-left:1rem;">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
         @endif
 

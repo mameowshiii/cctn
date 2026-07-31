@@ -1560,14 +1560,20 @@ body.admin-dashboard-page .admin-main-wrapper > footer {
     align-items: center;
 }
 .lp-hero-img-wrap {
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
     max-width: 520px;
     width: 100%;
 }
-.lp-hero-img { width: 100%; height: auto; display: block; transition: transform 0.6s; }
-.lp-hero-img:hover { transform: scale(1.02); }
+.lp-hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s, filter 0.6s;
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.12));
+}
+.lp-hero-img:hover {
+    transform: translateY(-8px) scale(1.02);
+    filter: drop-shadow(0 25px 40px rgba(220,38,38,0.22));
+}
 
 /* ── Features Bar ───────────────────────────── */
 .lp-features-bar {
@@ -1578,8 +1584,8 @@ body.admin-dashboard-page .admin-main-wrapper > footer {
 }
 .lp-features-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
 }
 .lp-feature-item { display: flex; align-items: center; gap: 1rem; }
 .lp-feature-item > div { display: flex; flex-direction: column; gap: 0.1rem; }
@@ -1744,6 +1750,9 @@ body.admin-dashboard-page .admin-main-wrapper > footer {
     gap: 0.75rem;
     transition: box-shadow 0.2s, transform 0.2s;
 }
+#trouble-step1 { border-left-color: var(--primary); }
+#trouble-step2 { border-left-color: #d97706; }
+#trouble-step3 { border-left-color: #059669; }
 .lp-trouble-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.07); transform: translateY(-2px); }
 .lp-trouble-step { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary); }
 .lp-step-gold  { color: #b45309; }
@@ -1819,6 +1828,7 @@ body.admin-dashboard-page .admin-main-wrapper > footer {
     .lp-plans-grid { grid-template-columns: 1fr; }
     .lp-features-grid { grid-template-columns: repeat(2, 1fr); }
     .lp-hero-title { font-size: 2rem; }
+    .lp-hero-br { display: none; }
     .lp-contact-inner { flex-direction: column; text-align: center; }
     .lp-contact-right { text-align: center; }
 }
