@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\NotificationController as AdminNotification;
 
 // ─── Public Routes ───────────────────────────────────────────────────────────
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/download-apk', [HomeController::class, 'downloadApk'])->name('download.apk');
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');

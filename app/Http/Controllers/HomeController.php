@@ -18,4 +18,23 @@ class HomeController extends Controller
 
         return view('home', compact('services', 'troubleId'));
     }
+
+    /**
+     * Streams the mobile companion app APK with proper headers.
+     */
+    public function downloadApk()
+    {
+        $path = public_path('downloads/cctn-app.apk');
+        
+        if (!file_exists($path)) {
+            abort(404, 'The requested APK file could not be found.');
+        }
+
+        return response()->download($path, 'cctn-app.apk', [
+            'Content-Type' => 'application/vnd.android.package-archive',
+            'Cache-Control' => 'no-cache, no-store, must-revalidate',
+            'Pragma' => 'no-cache',
+            'Expires' => '0',
+        ]);
+    }
 }
