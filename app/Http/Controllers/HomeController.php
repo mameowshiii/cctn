@@ -24,8 +24,13 @@ class HomeController extends Controller
      */
     public function downloadApk()
     {
-        $path = public_path('downloads/cctn-app.apk');
+        $path = resource_path('apk/cctn-app.apk');
         
+        if (!file_exists($path)) {
+            // Fallback to public folder if resource path does not exist in local development
+            $path = public_path('downloads/cctn-app.apk');
+        }
+
         if (!file_exists($path)) {
             abort(404, 'The requested APK file could not be found.');
         }
