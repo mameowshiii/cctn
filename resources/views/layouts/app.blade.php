@@ -424,6 +424,7 @@
 
     <footer style="background: #0f172a; padding: 2rem 1rem; text-align: center; color: #94a3b8; font-size: 0.85rem; margin-top: 3rem;">
         <p>&copy; {{ date('Y') }} BCTVI Broadband Telecommunications. All Rights Reserved.</p>
+        <p style="margin-top: 0.5rem;"><a href="{{ route('admin.login') }}" style="color: #64748b; text-decoration: none; font-weight: 600;">Staff / Admin Login</a></p>
     </footer>
 
     <script>
