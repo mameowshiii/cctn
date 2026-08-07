@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Client\DashboardController as ClientDashboard;
 use App\Http\Controllers\Client\AppointmentController as ClientAppointment;
 use App\Http\Controllers\Client\BillingController as ClientBilling;
+use App\Http\Controllers\Client\NotificationController as ClientNotification;
 use App\Http\Controllers\Admin\AuthController as AdminAuth;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\AppointmentController as AdminAppointment;
@@ -46,6 +47,10 @@ Route::middleware('auth.client')->group(function () {
     Route::get('/api/booked-slots', [ClientAppointment::class, 'getBookedSlots'])->name('api.booked-slots');
 
     Route::get('/billing', [ClientBilling::class, 'index'])->name('client.billing');
+
+    Route::get('/notifications', [ClientNotification::class, 'index'])->name('client.notifications');
+    Route::post('/notifications/{id}/read', [ClientNotification::class, 'markRead'])->name('client.notifications.read');
+    Route::post('/notifications/read-all', [ClientNotification::class, 'markAllRead'])->name('client.notifications.read-all');
 });
 
 // ─── Admin Routes (Protected) ────────────────────────────────────────────────

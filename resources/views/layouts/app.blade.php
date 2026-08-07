@@ -4,68 +4,350 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#dc2626">
-    <title>@yield('title', 'CCTN Bantayan Booking & Appointment')</title>
-    <meta name="description" content="Book appointments and broadcasting services online for Cine Cebu Television Network - Bantayan Branch.">
+    <title>@yield('title', 'CCTN / BCTVI Broadband Telecommunications')</title>
+    <meta name="description" content="Official CCTN / BCTVI Broadband Client Portal & Mobile App. Book WiFi installation, manage statements, and receive installation updates.">
     
-    <link rel="icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/images/bctvi-logo.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ filemtime(public_path('assets/css/style.css')) }}">
     
+    <style>
+        /* Modern Mobile Client Navigation Drawer & Bottom Bar */
+        .client-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+        }
+        .client-navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .client-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .client-brand-img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+        }
+        .client-brand-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: #dc2626;
+            line-height: 1;
+            letter-spacing: -0.5px;
+        }
+        .client-brand-sub {
+            font-size: 0.7rem;
+            color: #64748b;
+            font-weight: 700;
+            display: block;
+        }
+
+        /* Drawer Overlay */
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .drawer-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Client Drawer Menu */
+        .client-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 290px;
+            background: #ffffff;
+            z-index: 201;
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 25px rgba(0,0,0,0.15);
+        }
+        .drawer-overlay.active .client-drawer {
+            transform: translateX(0);
+        }
+
+        .drawer-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .drawer-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .drawer-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid #dc2626;
+            object-fit: cover;
+        }
+        .drawer-user-name {
+            font-weight: 800;
+            font-size: 1rem;
+            line-height: 1.2;
+        }
+        .drawer-user-role {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+        .btn-drawer-close {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .drawer-menu {
+            padding: 1rem;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+        .drawer-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.85rem 1rem;
+            border-radius: 12px;
+            color: #334155;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.92rem;
+            transition: all 0.2s ease;
+        }
+        .drawer-item:hover, .drawer-item.active {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+        .drawer-item-icon {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+        .drawer-badge {
+            margin-left: auto;
+            background: #dc2626;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 0.15rem 0.5rem;
+            border-radius: 99px;
+        }
+
+        .drawer-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        /* Bottom Navigation Bar for Mobile */
+        .bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            z-index: 99;
+            padding: 0.4rem 0.5rem 0.6rem 0.5rem;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.05);
+        }
+        .bottom-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            text-align: center;
+        }
+        .bottom-nav-item {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.68rem;
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            padding: 4px 0;
+        }
+        .bottom-nav-item.active {
+            color: #dc2626;
+        }
+        .bottom-nav-icon {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .bottom-nav { display: block; }
+            body { padding-bottom: 65px; }
+            .desktop-nav-links { display: none !important; }
+        }
+    </style>
     @stack('styles')
 </head>
 <body>
 
-    <header class="lp-header">
-        <div class="container lp-navbar">
-            <a href="{{ route('home') }}" class="lp-logo">
-                <img src="{{ asset('assets/images/cctn-logo.png') }}" alt="CCTN Logo" class="lp-logo-img">
-                <div class="lp-logo-text">
-                    <span class="lp-logo-name">CCTN</span>
-                    <span class="lp-logo-sub">Bantayan</span>
-                </div>
-            </a>
+    <!-- Header Navbar -->
+    <header class="client-header">
+        <div class="client-navbar">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <button class="btn-drawer-close" style="color: #0f172a;" onclick="toggleDrawer(true)" aria-label="Open Navigation Drawer">
+                    ☰
+                </button>
+                <a href="{{ route('home') }}" class="client-brand">
+                    <img src="{{ asset('assets/images/bctvi-logo.png') }}" alt="BCTVI Logo" class="client-brand-img">
+                    <div>
+                        <span class="client-brand-name">BCTVI</span>
+                        <span class="client-brand-sub">Broadband Services</span>
+                    </div>
+                </a>
+            </div>
 
-            <ul class="lp-nav-links" id="lp-nav-menu">
-                <li><a href="{{ route('home') }}" class="lp-nav-link {{ request()->routeIs('home') ? 'lp-nav-active' : '' }}">Home</a></li>
-                <li><a href="{{ route('home') }}#download" class="lp-nav-link">Mobile App</a></li>
-
+            <!-- Desktop Nav Links -->
+            <div class="desktop-nav-links" style="display: flex; align-items: center; gap: 1.5rem;">
+                <a href="{{ route('home') }}" class="drawer-item {{ request()->routeIs('home') ? 'active' : '' }}" style="padding: 0.4rem 0.8rem;">🏠 Home</a>
+                
                 @auth('client')
-                    <li><a href="{{ route('client.dashboard') }}" class="lp-nav-link {{ request()->routeIs('client.dashboard') ? 'lp-nav-active' : '' }}">My Dashboard</a></li>
-                    <li><a href="{{ route('client.appointments') }}" class="lp-nav-link {{ request()->routeIs('client.appointments') ? 'lp-nav-active' : '' }}">My Bookings</a></li>
-                    <li><a href="{{ route('client.billing') }}" class="lp-nav-link {{ request()->routeIs('client.billing') ? 'lp-nav-active' : '' }}">Billing</a></li>
-                    <li>
-                        <span class="lp-nav-user">
-                            <img src="{{ auth('client')->user()->profile_photo ? asset(auth('client')->user()->profile_photo) : asset('assets/img/default-avatar.svg') }}" alt="Avatar" class="lp-nav-avatar">
-                            {{ auth('client')->user()->firstname }}
-                        </span>
-                    </li>
-                    <li><a href="{{ route('client.book') }}" class="lp-btn-nav-book">Book Now</a></li>
-                    <li>
-                        <form action="{{ route('logout') }}" method="POST" style="display:inline; margin: 0; padding: 0;">
-                            @csrf
-                            <button type="submit" class="lp-btn-nav-logout" style="background: none; cursor:pointer;">Logout</button>
-                        </form>
-                    </li>
+                    @php
+                        $unreadCount = \App\Models\Notification::where('for_admin', false)
+                            ->where(function($q){ $q->where('client_id', auth('client')->id())->orWhereNull('client_id'); })
+                            ->where('is_read', false)->count();
+                    @endphp
+                    <a href="{{ route('client.appointments') }}" class="drawer-item {{ request()->routeIs('client.appointments*') ? 'active' : '' }}" style="padding: 0.4rem 0.8rem;">📋 My Bookings</a>
+                    <a href="{{ route('client.billing') }}" class="drawer-item {{ request()->routeIs('client.billing*') ? 'active' : '' }}" style="padding: 0.4rem 0.8rem;">💳 Payments</a>
+                    <a href="{{ route('client.notifications') }}" class="drawer-item {{ request()->routeIs('client.notifications*') ? 'active' : '' }}" style="padding: 0.4rem 0.8rem; position:relative;">
+                        🔔 Notifications
+                        @if($unreadCount > 0)
+                            <span class="drawer-badge" style="margin-left: 4px;">{{ $unreadCount }}</span>
+                        @endif
+                    </a>
+                    <a href="{{ route('client.book') }}" class="btn-step btn-submit" style="padding: 0.5rem 1.25rem; font-size: 0.85rem; text-decoration: none; border-radius: 99px;">
+                        ⚡ Book Installation
+                    </a>
                 @else
-                    <li><a href="{{ route('login') }}" class="lp-nav-link {{ request()->routeIs('login') ? 'lp-nav-active' : '' }}">Login</a></li>
-                    <li><a href="{{ route('register') }}" class="lp-nav-link {{ request()->routeIs('register') ? 'lp-nav-active' : '' }}">Register</a></li>
-                    <li>
-                        <a href="{{ route('admin.login') }}" class="lp-btn-admin">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                            Admin Portal
-                        </a>
-                    </li>
+                    <a href="{{ route('login') }}" class="drawer-item" style="padding: 0.4rem 0.8rem;">Login</a>
+                    <a href="{{ route('register') }}" class="btn-step btn-submit" style="padding: 0.5rem 1.25rem; font-size: 0.85rem; text-decoration: none; border-radius: 99px;">
+                        Get Started
+                    </a>
                 @endauth
-            </ul>
-
-            <button class="lp-hamburger" id="lp-hamburger" aria-label="Toggle menu" onclick="document.getElementById('lp-nav-menu').classList.toggle('lp-nav-open')">
-                <span></span><span></span><span></span>
-            </button>
+            </div>
         </div>
     </header>
 
+    <!-- Slide-Out Mobile Navigation Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer(false)">
+        <div class="client-drawer" onclick="event.stopPropagation()">
+            <div class="drawer-header">
+                @auth('client')
+                    <div class="drawer-user">
+                        <img src="{{ auth('client')->user()->profile_photo ? asset(auth('client')->user()->profile_photo) : asset('assets/images/bctvi-logo.png') }}" alt="Avatar" class="drawer-avatar">
+                        <div>
+                            <div class="drawer-user-name">{{ auth('client')->user()->firstname }} {{ auth('client')->user()->lastname }}</div>
+                            <div class="drawer-user-role">Acct: {{ auth('client')->user()->account_number ?? 'Client Account' }}</div>
+                        </div>
+                    </div>
+                @else
+                    <div class="drawer-user">
+                        <img src="{{ asset('assets/images/bctvi-logo.png') }}" alt="BCTVI Logo" class="drawer-avatar">
+                        <div>
+                            <div class="drawer-user-name">Welcome Client</div>
+                            <div class="drawer-user-role">BCTVI Broadband Portal</div>
+                        </div>
+                    </div>
+                @endauth
+                <button class="btn-drawer-close" onclick="toggleDrawer(false)">&times;</button>
+            </div>
+
+            <div class="drawer-menu">
+                <a href="{{ route('home') }}" class="drawer-item {{ request()->routeIs('home') ? 'active' : '' }}">
+                    <span class="drawer-item-icon">🏠</span> Home
+                </a>
+                
+                @auth('client')
+                    <a href="{{ route('client.dashboard') }}" class="drawer-item {{ request()->routeIs('client.dashboard*') ? 'active' : '' }}">
+                        <span class="drawer-item-icon">📊</span> Client Dashboard
+                    </a>
+                    <a href="{{ route('client.appointments') }}" class="drawer-item {{ request()->routeIs('client.appointments*') ? 'active' : '' }}">
+                        <span class="drawer-item-icon">📋</span> My Bookings
+                    </a>
+                    <a href="{{ route('client.dashboard') }}#schedule" class="drawer-item">
+                        <span class="drawer-item-icon">📅</span> Installation Schedule
+                    </a>
+                    <a href="{{ route('client.billing') }}" class="drawer-item {{ request()->routeIs('client.billing*') ? 'active' : '' }}">
+                        <span class="drawer-item-icon">💳</span> Payments
+                    </a>
+                    <a href="{{ route('client.notifications') }}" class="drawer-item {{ request()->routeIs('client.notifications*') ? 'active' : '' }}">
+                        <span class="drawer-item-icon">🔔</span> Notifications
+                        @if(isset($unreadCount) && $unreadCount > 0)
+                            <span class="drawer-badge">{{ $unreadCount }}</span>
+                        @endif
+                    </a>
+                    <a href="{{ route('client.dashboard') }}#profile" class="drawer-item">
+                        <span class="drawer-item-icon">👤</span> Profile
+                    </a>
+                    <a href="{{ route('client.dashboard') }}#settings" class="drawer-item">
+                        <span class="drawer-item-icon">⚙️</span> Settings
+                    </a>
+                    <div style="border-top: 1px solid #f1f5f9; margin: 0.5rem 0;"></div>
+                    <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
+                        @csrf
+                        <button type="submit" class="drawer-item" style="width: 100%; border: none; background: none; text-align: left; cursor: pointer; color: #ef4444;">
+                            <span class="drawer-item-icon">🚪</span> Logout
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="drawer-item">
+                        <span class="drawer-item-icon">🔑</span> Login
+                    </a>
+                    <a href="{{ route('register') }}" class="drawer-item">
+                        <span class="drawer-item-icon">📝</span> Register
+                    </a>
+                @endauth
+            </div>
+
+            <div class="drawer-footer">
+                &copy; {{ date('Y') }} BCTVI Broadband Telecommunications.<br>Customer Support: (032) 123-4567
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Wrapper -->
     <main class="lp-main-wrap">
         @if (session('success_message') || session('error_message') || session('redirect_message') || $errors->any())
-            <div class="container" style="margin-top: 1.5rem;">
+            <div class="container" style="max-width: 1200px; margin: 1rem auto 0 auto; padding: 0 1rem;">
                 @if (session('success_message'))
                     <div class="alert alert-success fade-in">{{ session('success_message') }}</div>
                 @endif
@@ -90,11 +372,64 @@
         @yield('content')
     </main>
 
-    <footer style="background: #0f172a; padding: 2rem; text-align: center; color: #94a3b8; font-size: 0.9rem; margin-top: 3rem;">
-        <p>&copy; {{ date('Y') }} CCTN Bantayan. All Rights Reserved.</p>
+    <!-- Bottom Navigation Bar for Mobile Viewports -->
+    <nav class="bottom-nav">
+        <div class="bottom-nav-grid">
+            <a href="{{ route('home') }}" class="bottom-nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
+                <span class="bottom-nav-icon">🏠</span>
+                <span>Home</span>
+            </a>
+            @auth('client')
+                <a href="{{ route('client.appointments') }}" class="bottom-nav-item {{ request()->routeIs('client.appointments*') ? 'active' : '' }}">
+                    <span class="bottom-nav-icon">📋</span>
+                    <span>Bookings</span>
+                </a>
+                <a href="{{ route('client.book') }}" class="bottom-nav-item {{ request()->routeIs('client.book*') ? 'active' : '' }}" style="color:#dc2626;">
+                    <span class="bottom-nav-icon" style="background:#dc2626; color:#fff; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-top:-10px; box-shadow:0 4px 10px rgba(220,38,38,0.3);">⚡</span>
+                    <span style="margin-top:2px;">Book</span>
+                </a>
+                <a href="{{ route('client.billing') }}" class="bottom-nav-item {{ request()->routeIs('client.billing*') ? 'active' : '' }}">
+                    <span class="bottom-nav-icon">💳</span>
+                    <span>Payments</span>
+                </a>
+                <a href="{{ route('client.notifications') }}" class="bottom-nav-item {{ request()->routeIs('client.notifications*') ? 'active' : '' }}">
+                    <span class="bottom-nav-icon">🔔</span>
+                    <span>Alerts</span>
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="bottom-nav-item">
+                    <span class="bottom-nav-icon">🔑</span>
+                    <span>Login</span>
+                </a>
+                <a href="{{ route('register') }}" class="bottom-nav-item" style="color:#dc2626;">
+                    <span class="bottom-nav-icon" style="background:#dc2626; color:#fff; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-top:-10px; box-shadow:0 4px 10px rgba(220,38,38,0.3);">✨</span>
+                    <span>Join</span>
+                </a>
+                <a href="{{ route('home') }}#plans" class="bottom-nav-item">
+                    <span class="bottom-nav-icon">📶</span>
+                    <span>Plans</span>
+                </a>
+                <a href="{{ route('login') }}" class="bottom-nav-item">
+                    <span class="bottom-nav-icon">👤</span>
+                    <span>Account</span>
+                </a>
+            @endauth
+        </div>
+    </nav>
+
+    <footer style="background: #0f172a; padding: 2rem 1rem; text-align: center; color: #94a3b8; font-size: 0.85rem; margin-top: 3rem;">
+        <p>&copy; {{ date('Y') }} BCTVI Broadband Telecommunications. All Rights Reserved.</p>
     </footer>
 
-    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script>
+        function toggleDrawer(open) {
+            const drawer = document.getElementById('drawerOverlay');
+            if (drawer) {
+                if (open) drawer.classList.add('active');
+                else drawer.classList.remove('active');
+            }
+        }
+    </script>
     @stack('scripts')
 </body>
 </html>
