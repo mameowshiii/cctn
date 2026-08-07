@@ -17,7 +17,7 @@ class WalkInController extends Controller
     public function create()
     {
         $services = Service::where('status', 'Active')->orderBy('price', 'asc')->get();
-        $timeSlots = TimeSlot::where('is_active', true)->get();
+        $timeSlots = TimeSlot::where('is_available', true)->get();
 
         return view('admin.walkin.create', compact('services', 'timeSlots'));
     }
