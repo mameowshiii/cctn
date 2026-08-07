@@ -9,10 +9,11 @@ class Service extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['service_name', 'description', 'duration_minutes', 'price', 'status'];
+    protected $fillable = ['service_name', 'speed', 'description', 'duration_minutes', 'price', 'installation_fee', 'status'];
 
     protected $casts = [
         'price'            => 'decimal:2',
+        'installation_fee' => 'decimal:2',
         'duration_minutes' => 'integer',
     ];
 

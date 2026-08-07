@@ -64,7 +64,10 @@
 
 @section('content')
 <div class="page-header">
-    <h1 class="page-title">Appointment Management</h1>
+    <h1 class="page-title">Appointment & Installation Management</h1>
+    <a href="{{ route('admin.walkin.create') }}" class="btn-filter" style="background:#dc2626; color:#ffffff; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.25rem; font-size:0.95rem; border-radius:10px;">
+        ➕ New Walk-In Client Booking
+    </a>
 </div>
 
 @if (session('success_message'))

@@ -19,6 +19,8 @@ use App\Http\Controllers\Admin\ManpowerController as AdminManpower;
 use App\Http\Controllers\Admin\MaintenanceController as AdminMaintenance;
 use App\Http\Controllers\Admin\NotificationController as AdminNotification;
 
+use App\Http\Controllers\Admin\WalkInController as AdminWalkIn;
+
 // ─── Public Routes ───────────────────────────────────────────────────────────
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/download-apk', [HomeController::class, 'downloadApk'])->name('download.apk');
@@ -60,6 +62,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/appointments', [AdminAppointment::class, 'index'])->name('admin.appointments');
         Route::post('/appointments/update', [AdminAppointment::class, 'update'])->name('admin.appointments.update');
         Route::post('/appointments/quick-update', [AdminAppointment::class, 'quickUpdate'])->name('admin.appointments.quick_update');
+
+        Route::get('/walk-in/create', [AdminWalkIn::class, 'create'])->name('admin.walkin.create');
+        Route::post('/walk-in/store', [AdminWalkIn::class, 'store'])->name('admin.walkin.store');
+        Route::get('/walk-in/receipt/{id}', [AdminWalkIn::class, 'receipt'])->name('admin.walkin.receipt');
 
         Route::get('/clients', [AdminClient::class, 'index'])->name('admin.clients');
 
