@@ -264,6 +264,7 @@
                     </a>
                 @else
                     <a href="{{ route('login') }}" class="drawer-item" style="padding: 0.4rem 0.8rem;">Login</a>
+                    <a href="{{ route('admin.login') }}" class="drawer-item" style="padding: 0.4rem 0.8rem; color: #64748b;">Admin Login</a>
                     <a href="{{ route('register') }}" class="btn-step btn-submit" style="padding: 0.5rem 1.25rem; font-size: 0.85rem; text-decoration: none; border-radius: 99px;">
                         Get Started
                     </a>
@@ -336,6 +337,9 @@
                 @else
                     <a href="{{ route('login') }}" class="drawer-item">
                         <span class="drawer-item-icon">🔑</span> Login
+                    </a>
+                    <a href="{{ route('admin.login') }}" class="drawer-item">
+                        <span class="drawer-item-icon">🛡️</span> Admin Login
                     </a>
                     <a href="{{ route('register') }}" class="drawer-item">
                         <span class="drawer-item-icon">📝</span> Register
