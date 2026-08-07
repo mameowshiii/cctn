@@ -39,7 +39,7 @@
         <!-- Right Column: Hero Image -->
         <div class="lp-hero-visual">
             <div class="lp-hero-img-wrap" style="text-align: center;">
-                <img src="{{ asset('assets/images/bctvi-logo.png') }}" alt="BCTVI Broadband Logo" class="lp-hero-img" id="hero-img" style="max-height: 280px; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));">
+                <img src="{{ asset('assets/images/cctn-logo.png') }}" alt="BCTVI Broadband Logo" class="lp-hero-img" id="hero-img" style="max-height: 280px; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));">
             </div>
         </div>
     </div>
@@ -186,7 +186,7 @@
                 </div>
             </div>
             <div class="lp-download-visual" style="text-align: center;">
-                <img src="{{ asset('assets/images/bctvi-logo.png') }}" alt="BCTVI Mobile App" style="max-height: 220px; object-fit: contain;">
+                <img src="{{ asset('assets/images/cctn-logo.png') }}" alt="BCTVI Mobile App" style="max-height: 220px; object-fit: contain;">
             </div>
         </div>
     </div>

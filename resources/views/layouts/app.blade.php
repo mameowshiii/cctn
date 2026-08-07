@@ -210,7 +210,12 @@
             font-size: 1.2rem;
         }
 
+        .mobile-only-trigger {
+            display: none;
+        }
+
         @media (max-width: 768px) {
+            .mobile-only-trigger { display: inline-block; }
             .bottom-nav { display: block; }
             body { padding-bottom: 65px; }
             .desktop-nav-links { display: none !important; }
@@ -224,11 +229,11 @@
     <header class="client-header">
         <div class="client-navbar">
             <div style="display: flex; align-items: center; gap: 12px;">
-                <button class="btn-drawer-close" style="color: #0f172a;" onclick="toggleDrawer(true)" aria-label="Open Navigation Drawer">
+                <button class="btn-drawer-close mobile-only-trigger" style="color: #0f172a;" onclick="toggleDrawer(true)" aria-label="Open Navigation Drawer">
                     ☰
                 </button>
                 <a href="{{ route('home') }}" class="client-brand">
-                    <img src="{{ asset('assets/images/bctvi-logo.png') }}" alt="BCTVI Logo" class="client-brand-img">
+                    <img src="{{ asset('assets/images/cctn-logo.png') }}" alt="BCTVI Logo" class="client-brand-img">
                     <div>
                         <span class="client-brand-name">BCTVI</span>
                         <span class="client-brand-sub">Broadband Services</span>
@@ -273,7 +278,7 @@
             <div class="drawer-header">
                 @auth('client')
                     <div class="drawer-user">
-                        <img src="{{ auth('client')->user()->profile_photo ? asset(auth('client')->user()->profile_photo) : asset('assets/images/bctvi-logo.png') }}" alt="Avatar" class="drawer-avatar">
+                        <img src="{{ auth('client')->user()->profile_photo ? asset(auth('client')->user()->profile_photo) : asset('assets/images/cctn-logo.png') }}" alt="Avatar" class="drawer-avatar">
                         <div>
                             <div class="drawer-user-name">{{ auth('client')->user()->firstname }} {{ auth('client')->user()->lastname }}</div>
                             <div class="drawer-user-role">Acct: {{ auth('client')->user()->account_number ?? 'Client Account' }}</div>
@@ -281,7 +286,7 @@
                     </div>
                 @else
                     <div class="drawer-user">
-                        <img src="{{ asset('assets/images/bctvi-logo.png') }}" alt="BCTVI Logo" class="drawer-avatar">
+                        <img src="{{ asset('assets/images/cctn-logo.png') }}" alt="BCTVI Logo" class="drawer-avatar">
                         <div>
                             <div class="drawer-user-name">Welcome Client</div>
                             <div class="drawer-user-role">BCTVI Broadband Portal</div>
